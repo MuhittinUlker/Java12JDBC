@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+    <!-- a SessionFactory instance listed as /jndi/name -->
+    <session-factory>
+        <!--Kullanilacak VT driver tanimlama-->
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <!--Baglanti icin gerekli degerler-->
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/Java12OrnekETicaret</property>
+        <property name="hibernate.connection.username">postgres</property>
+        <property name="hibernate.connection.password">1234</property>
+        <!-- En onemli ayarlardan bir tanesidir. Bu ayar ile otomatik olarak tablo olusturma ve guncelleme
+        islemlerinin modunu belirlersiniz.
+            CREATE: Proje her yeni basladiginda tablolar yeniden olusturulur. Mevcut tablolar silinir.
+            CREATE-DROP: Create ile ayni islemi yapiyor. Tek farki projeyi kapattiginiz an olusturdugu
+            tablolari siler.Test icin kullanilabilir.
+            UPDATE: Eger VT'da tablo yok ise olusturur. Varsa yapisal degisiklikleri uygular,verileri silmez.
+            VALIDATE: VT tablo ve projedeki entitiy uyumlulugunu kontrol edip fark vcrsa hata firlatir.-->
+        <property name="hibernate.hbm2ddl.auto">update</property>
+        <!--Hibernate'in arka planda calistirdigi sql sorgusunu console ekranina yazmasini saglamak icin:-->
+        <property name="hibernate.show_sql">true</property>
+        <!--Yazdigi sql sorgusunu daha duzenli gostermesi icin kullanilir-->
+        <property name="hibernate.format_sql">true</property>
+        <!--Hibernate @Entity ile isaretlenmemis siniflari burada mapping icine yazsak bile maplemez
+            Hibernate sinif ile vt arasinda veri iletisimi kurma yetenegine ancak mapping ile sahip olur.-->
+        <mapping class="com.muhittinu.repository.entitiy.Sepet"/>
+        <mapping class="com.muhittinu.repository.entitiy.Urun"/>
+        <mapping class="com.muhittinu.repository.entitiy.Satis"/>
+        <mapping class="com.muhittinu.repository.entitiy.Musteri"/>
+        <mapping class="com.muhittinu.repository.entitiy.SatisDetay"/>
+
+    </session-factory>
+
+</hibernate-configuration>
