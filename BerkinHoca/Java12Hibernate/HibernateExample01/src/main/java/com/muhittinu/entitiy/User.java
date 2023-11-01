@@ -35,4 +35,5 @@ public class User {
     private List<String> interests;
     @ElementCollection
     private Map<String,Adres> adresler;
+
 }
