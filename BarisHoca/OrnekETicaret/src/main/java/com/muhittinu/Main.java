@@ -49,7 +49,7 @@ public class Main {
 //      Musteri musteriSilinecek = session.get(Musteri.class,3L);
 //      session.delete(musteriSilinecek);
 
-        //CriteriaOrnekleri criteriaOrnekleri = new CriteriaOrnekleri();
+        CriteriaOrnekleri criteriaOrnekleri = new CriteriaOrnekleri();
         //criteriaOrnekleri.findAll().forEach(System.out::println);
         //criteriaOrnekleri.selectOneColumn().forEach(System.out::println);
         //String donenAd = criteriaOrnekleri.selectOneColumnById(2L);
@@ -64,5 +64,8 @@ public class Main {
         //new UrunRepository().save(urunLaptop);
 
         //new UrunRepository().deleteById(4L);
+        //criteriaOrnekleri.findAllNativeQuery2().forEach(System.out::println);
+        //criteriaOrnekleri.findAllNamedQuery().forEach(System.out::println);
+        criteriaOrnekleri.findAllByNameNamedQuery("%r%").forEach(System.out::println);
     }
 }

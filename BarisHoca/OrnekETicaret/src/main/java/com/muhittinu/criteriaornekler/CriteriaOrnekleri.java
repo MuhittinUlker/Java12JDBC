@@ -2,8 +2,10 @@ package com.muhittinu.criteriaornekler;
 
 import com.muhittinu.repository.entitiy.Musteri;
 import com.muhittinu.repository.entitiy.Urun;
+import com.muhittinu.repository.views.VwUrun;
 import com.muhittinu.utility.HibernateUtility;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import javax.persistence.criteria.*;
 import java.math.BigDecimal;
@@ -100,5 +102,36 @@ public class CriteriaOrnekleri {
         Predicate sonKosul = criteriaBuilder.and(p1,p2);
         criteriaQuery.select(root).where(sonKosul);
         return session.createQuery(criteriaQuery).getResultList();
+    }
+    /**
+     * Native Query yazimi: SQL kodlari ile JPA(Hibernate) uzerinden sorgulama yapabilirisiniz
+     *
+     * Eger direkt sorguyu yazip birakirsaniz geriye Object[] doner
+     * Gidip tip belirtmek yeterli
+     */
+    public List<Urun> findAllNativeQuery(){
+        List<Urun> resultList = session.createNativeQuery("SELECT * FROM tblurun", Urun.class).getResultList();
+        return resultList;
+    }
+    public List<VwUrun> findAllNativeQuery2(){
+        List<VwUrun> resultList = session.createNativeQuery("SELECT id,ad FROM tblurun", VwUrun.class).getResultList();
+        return resultList;
+    }
+    /*
+        NamedQuery
+        Kullanilacak dil JPQL yada HQL
+        Entity uzerine yazilir
+        SQL -> SELECT * FROM tblmusteri
+        **JPQL** -> SELECT m FROM Musteri m
+        HQL -> FROM Musteri
+     */
+    public List<Urun> findAllNamedQuery(){
+        List<Urun> resultList = session.createNamedQuery("Urun.findAll", Urun.class).getResultList();
+        return resultList;
+    }
+    public List<Urun> findAllByNameNamedQuery(String urunAd){
+        Query<Urun> namedQuery = session.createNamedQuery("Urun.findByName", Urun.class);
+        namedQuery.setParameter("urunad",urunAd);
+        return namedQuery.getResultList();
     }
 }

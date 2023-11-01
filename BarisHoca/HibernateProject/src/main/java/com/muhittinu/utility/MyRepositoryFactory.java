@@ -2,6 +2,7 @@ package com.muhittinu.utility;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -46,7 +47,7 @@ public class MyRepositoryFactory<T,ID> implements  ICrud<T, ID>{
     @Override
     public T update(T entity) {
         openSession();
-        //session.update(entity); void oldugu icin JPA merge() kullanabiliriz
+        //session.update(entitiy); void oldugu icin JPA merge() kullanabiliriz
         T merge = (T)session.merge(entity);
         closeSession();
         return merge;
