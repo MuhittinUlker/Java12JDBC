@@ -1,7 +1,9 @@
-package com.muhittinu.utility;
+package com.muhittinu.util;
 
+import lombok.Getter;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -11,6 +13,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+@Getter
 public class MyRepositoryFactory<T,ID> implements  ICrud<T, ID>{
     Class<T> clazz;
     public MyRepositoryFactory(Class<T> clazz){
@@ -19,11 +22,12 @@ public class MyRepositoryFactory<T,ID> implements  ICrud<T, ID>{
     private Session session;
     private Transaction transaction;
     private CriteriaBuilder criteriaBuilder;
-    private void openSession() {
+    protected void openSession() {
         session = HibernateUtility.getSessionFactory().openSession();
         transaction = session.beginTransaction();
+        criteriaBuilder = session.getCriteriaBuilder();
     }
-    private void closeSession() {
+    protected void closeSession() {
         transaction.commit();
         session.close();
     }
@@ -53,9 +57,8 @@ public class MyRepositoryFactory<T,ID> implements  ICrud<T, ID>{
     }
     @Override
     public void deleteById(ID id)  {
-        T t = findById(id).get();
         openSession();
-        session.delete(t);
+        session.delete(session.get(clazz, (Serializable) id));
         closeSession();
     }
     @Override

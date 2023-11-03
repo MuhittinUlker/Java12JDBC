@@ -5,8 +5,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,10 +24,15 @@ public class Personel {
     String name;
     Integer age;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "d_id")
+    @ManyToOne()
+    @Cascade(CascadeType.SAVE_UPDATE)
     Department department;
 
+    @OneToOne
+    @Cascade(CascadeType.SAVE_UPDATE)
+    Car car;
+    @ManyToMany()
+    List<Address> addresses = new ArrayList<>();
     @Override
     public String toString() {
         return "Personel{" +
@@ -32,6 +40,8 @@ public class Personel {
                 ", name='" + name + '\'' +
                 ", age=" + age +
                 ", department=" + department.getName() +
+                ", car=" + car +
+                ", adres="+ addresses +
                 '}';
     }
 }

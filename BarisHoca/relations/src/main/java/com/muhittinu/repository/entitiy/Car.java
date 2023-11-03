@@ -20,6 +20,17 @@ public class Car {
     String make;
     String model;
     String plate;
+    @OneToOne(mappedBy = "car")
+    Personel personel;
 
-
+    @Override
+    public String toString() {
+        return "Car{" +
+                "id=" + id +
+                ", make='" + make + '\'' +
+                ", model='" + model + '\'' +
+                ", plate='" + plate + '\'' +
+                ", personel=" + personel.name +
+                '}';
+    }
 }

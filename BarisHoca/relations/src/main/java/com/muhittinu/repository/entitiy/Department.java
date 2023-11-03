@@ -4,6 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -21,8 +25,10 @@ public class Department {
     Long id;
     String name;
 
-    @OneToMany(mappedBy = "department",fetch = FetchType.EAGER)
-    List<Personel> personelList=new ArrayList<>();
+    @OneToMany(mappedBy = "department")
+    @Fetch(FetchMode.JOIN)
+    @Cascade({CascadeType.SAVE_UPDATE,CascadeType.DELETE})
+    List<Personel> personelList = new ArrayList<>();
 
     @Override
     public String toString() {
