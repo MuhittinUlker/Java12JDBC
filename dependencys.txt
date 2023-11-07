@@ -1,7 +1,13 @@
 postgresql:
 
+maven:
+
 <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>42.6.0</version>
         </dependency>
+
+gradle:
+
+implementation group: 'org.postgresql', name: 'postgresql', version: '42.6.0'

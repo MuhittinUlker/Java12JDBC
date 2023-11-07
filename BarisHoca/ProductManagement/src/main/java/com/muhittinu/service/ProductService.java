@@ -3,6 +3,7 @@ package com.muhittinu.service;
 import com.muhittinu.entitiy.Product;
 import com.muhittinu.repository.ProductRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 public class ProductService {
@@ -31,5 +32,17 @@ public class ProductService {
 
     public void update(Product product) {
         productRepository.update(product);
+    }
+
+    public List<Product> listAll() {
+       return productRepository.findAll();
+    }
+
+    public Optional<Product> findById(long productId) {
+        return productRepository.findById(productId);
+    }
+
+    public List<Product> listLowStockProducts() {
+        return productRepository.listLowStockProducts();
     }
 }
