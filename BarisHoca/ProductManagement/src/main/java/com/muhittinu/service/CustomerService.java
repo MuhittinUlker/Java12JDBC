@@ -1,6 +1,7 @@
 package com.muhittinu.service;
 
 import com.muhittinu.entitiy.Customer;
+import com.muhittinu.entitiy.enums.EAccountType;
 import com.muhittinu.repository.CustomerRepository;
 
 import java.util.Optional;
@@ -26,5 +27,9 @@ public class CustomerService {
             System.out.println("Customer Not Found");
         }
         return Optional.empty();
+    }
+
+    public void upgradeAccount(Customer customer) {
+        customerRepository.update(customer);
     }
 }

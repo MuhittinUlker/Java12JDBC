@@ -1,5 +1,6 @@
 package com.muhittinu.entitiy;
 
+import com.muhittinu.entitiy.enums.EAccountType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,6 +22,8 @@ public class Customer{
     private Long id;
     private String password;
     private String identity;
+    @Builder.Default
+    private EAccountType accountType = EAccountType.NORMAL;
     @Embedded
     private Information information;
     @ManyToMany(mappedBy = "customers")

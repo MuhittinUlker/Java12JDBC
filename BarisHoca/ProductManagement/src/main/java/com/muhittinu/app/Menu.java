@@ -12,6 +12,12 @@ import java.util.HashMap;
 
 public class Menu {
 
+    /*
+    *satin alma isleminde indirim miktarina gore satin alsin
+    *transaction tablosu olsun;
+    -odeme tarihi,kim almis,neyi almis,kaca almis,kac adet almis
+    *product eklerken Admin belirli saatten sonra ekleme yapamsin
+     */
     private final CustomerController customerController;
     private final CategoryController categoryController;
     private final ProductController productController;
@@ -53,12 +59,14 @@ public class Menu {
         menuItems.put(2,"Urune Yorum Yap ve Puan Ver");
         menuItems.put(3,"Stogu bitmek uzere olan urunleri listele");
         menuItems.put(4,"Urune gore Yorumlari goster");
+        menuItems.put(5,"Hesabimi Yukselt");
         int key = BAUtils.menu(menuItems);
         switch (key) {
             case 1 -> productController.buyProduct(customer);
             case 2 -> productDetailController.commentAndRateProductById();
             case 3 -> productController.showLowStockProducts();
             case 4 -> productDetailController.showCommentsByProductId();
+            case 5-> customerController.upgradeAccount(customer);
         }
     }
 
